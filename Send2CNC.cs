@@ -181,7 +181,7 @@ namespace WindowsFormsApplication1
             btnHyundaiSave2.Enabled = true;
         }
 
-        private void generateBarFeedProgram()
+        private void generateBarFeedProgramOriginal()
         {
             string pullDist = null;
             string stubLength = null;
@@ -266,7 +266,93 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void generate2SidedProgram()
+        private void generateBarFeedProgram()
+        {
+            string pullDist = null;
+            string stubLength = null;
+
+            foreach (string s in ncfile1)       // scan file for bar puller data
+            {
+                if (s.Contains("(APPROACHX"))
+                {
+                    List<string> l = s.Split(',').ToList();
+                    pullDist = l[4].ToString();
+                    pullDist = pullDist.Replace("PULLDISTANCE", string.Empty);
+
+                    stubLength = l[5].ToString();
+                    stubLength = stubLength.Replace("STUBLENGTH", string.Empty);
+                }
+
+
+
+            }
+
+            ncFileBox.Clear();
+            ncfile3.Clear();
+
+            ncfile3.Add("% ");
+            ncfile3.Add("O0001 " + progName);               // output file is always number 1
+            ncfile3.Add("IF[#504 LT 0]THEN #531 = #504");
+            ncfile3.Add("IF[#504 GE 0]THEN #531 = 0.-#504");
+            ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+            if (chkBoxSafeCheck.Checked == true)
+            {
+                ncfile3.Add("/T" + txtBoxToolNo.Text);
+                ncfile3.Add("/G99 G96 S0 M5");
+                ncfile3.Add("/G0 X8.0 Z5.0");
+                ncfile3.Add("/M00");
+            }
+
+            ncfile3.Add("(USE VARIABLE 500 TO SET BAR LENGTH IN INCHES)");
+            ncfile3.Add("(VARIABLE 501 SHOWS CALCULATED NUMBER OF PIECES PER BAR)");
+            ncfile3.Add("(VARIABLE 502 SHOWS AMOUNT OF PIECES DONE IN CURRENT BAR)");
+            ncfile3.Add("(VARIABLE 508 COUNTS TOTAL NUMBER OF PIECES)");
+
+            ncfile3.Add("/#100=0");
+            //ncfile3.Add("#501=[[#500-" + txtBoxStubLength.Text + "]/" + txtBoxPullDist.Text + "]");
+            ncfile3.Add("/#501=[FIX[[#500-" + stubLength + "]/" + pullDist + "]]");
+            ncfile3.Add("/#502=0");
+            ncfile3.Add("/WHILE[#100LT#501]DO1");
+
+            foreach (string s in ncfile1)       // append file1 to this new file
+            {
+                ncfile3.Add(s);
+                if (s.Contains("CONDITIONAL PROGRAM RESTART"))
+                {
+                    ncfile3.Add(" /GOTO100");
+                    ncfile3.Add(" #508=#508+1");
+                    ncfile3.Add(" M30");
+                    ncfile3.Add(" N100");
+                }
+            }
+
+            ncfile3.Add("/#100=#100+1");
+            ncfile3.Add("/#502=#502+1");
+            ncfile3.Add("/#508=#508+1");
+            ncfile3.Add("END1");
+            ncfile3.Add("M30");
+
+            foreach (string s in ncfile3)
+            {
+                ncFileBox.AppendText(s);
+                ncFileBox.AppendText("\n");
+            }
+
+            btnTC20.Enabled = true;
+            btnEX110.Enabled = true;
+            btnSaveUSB.Enabled = false;
+            btnSL30Save.Enabled = false;
+            btnEX110Save.Enabled = true;
+            btnTC20Save.Enabled = true;
+            btnTC20Save2.Enabled = true;
+            btnEX110Save2.Enabled = true;
+            btnSL30Save2.Enabled = false;
+            btnHyundaiSave2.Enabled = false;
+
+        }
+
+        private void generate2SidedProgramOriginal()
         {
             if (TC20Flag == true)
             {
@@ -460,7 +546,203 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void generate1SidedProgram()
+        private void generate2SidedProgram()
+        {
+            if (TC20Flag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+                ncfile3.Add("IF[#504 LT 0]THEN #531 = #504");
+                ncfile3.Add("IF[#504 GE 0]THEN #531 = 0.-#504");
+                ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    ncfile3.Add(s);
+                }
+
+                ncfile3.Add("M00");
+                ncfile3.Add("IF[#505 LT 0]THEN #531 = #505");
+                ncfile3.Add("IF[#505 GE 0]THEN #531 = 0.-#505");
+                ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+
+                foreach (String s in ncfile2)       // append file2
+                {
+                    ncfile3.Add(s);
+                }
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = true;
+                btnTC20Save.Enabled = true;
+                btnEX110.Enabled = false;
+                btnEX110Save.Enabled = false;
+                btnSaveUSB.Enabled = false;
+                btnSL30Save.Enabled = false;
+                btnHyundai.Enabled = false;
+                btnHyundaiSave.Enabled = false;
+                btnTC20Save2.Enabled = true;
+                btnEX110Save2.Enabled = false;
+                btnSL30Save2.Enabled = false;
+                btnHyundaiSave2.Enabled = false;
+            }
+            else if (EX110Flag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+                ncfile3.Add("IF[#504 LT 0]THEN #531 = #504");
+                ncfile3.Add("IF[#504 GE 0]THEN #531 = 0.-#504");
+                ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    ncfile3.Add(s);
+                }
+
+                ncfile3.Add("M00");
+                ncfile3.Add("IF[#505 LT 0]THEN #531 = #505");
+                ncfile3.Add("IF[#505 GE 0]THEN #531 = 0.-#505");
+                ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+
+                foreach (String s in ncfile2)       // append file2
+                {
+                    ncfile3.Add(s);
+                }
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = false;
+                btnTC20Save.Enabled = false;
+                btnEX110.Enabled = true;
+                btnEX110Save.Enabled = true;
+                btnSaveUSB.Enabled = false;
+                btnSL30Save.Enabled = false;
+                btnHyundai.Enabled = false;
+                btnHyundaiSave.Enabled = false;
+                btnTC20Save2.Enabled = false;
+                btnEX110Save2.Enabled = true;
+                btnSL30Save2.Enabled = false;
+                btnHyundaiSave2.Enabled = false;
+            }
+
+            else if (HaasFlag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                //ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    if (!s.Contains("%"))
+                    {
+                        ncfile3.Add(s);
+                    }
+                }
+
+                ncfile3.Add("M00");
+
+                foreach (String s in ncfile2)       // append file2
+                {
+                    string temp = s;
+                    if (temp.Contains("G54")) temp = temp.Replace("G54", "G55");
+                    if (!temp.Contains("%"))
+                    {
+                        ncfile3.Add(temp);
+                    }
+
+                }
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = false;
+                btnTC20Save.Enabled = false;
+                btnEX110.Enabled = false;
+                btnEX110Save.Enabled = false;
+                btnSaveUSB.Enabled = true;
+                btnSL30Save.Enabled = true;
+                btnHyundai.Enabled = false;
+                btnHyundaiSave.Enabled = false;
+                btnTC20Save2.Enabled = false;
+                btnEX110Save2.Enabled = false;
+                btnSL30Save2.Enabled = true;
+                btnHyundaiSave2.Enabled = false;
+            }
+
+            else if (HyundaiFlag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                //ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    if (!s.Contains("%"))
+                    {
+                        ncfile3.Add(s);
+                    }
+                }
+
+                ncfile3.Add("M00");
+
+                foreach (String s in ncfile2)       // append file2
+                {
+                    string temp = s;
+                    if (temp.Contains("G54")) temp = temp.Replace("G54", "G55");
+                    if (!temp.Contains("%"))
+                    {
+                        ncfile3.Add(temp);
+                    }
+
+                }
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = false;
+                btnTC20Save.Enabled = false;
+                btnEX110.Enabled = false;
+                btnEX110Save.Enabled = false;
+                btnSaveUSB.Enabled = false;
+                btnSL30Save.Enabled = false;
+                btnHyundai.Enabled = true;
+                btnHyundaiSave.Enabled = true;
+                btnTC20Save2.Enabled = false;
+                btnEX110Save2.Enabled = false;
+                btnSL30Save2.Enabled = false;
+                btnHyundaiSave2.Enabled = true;
+            }
+        }
+
+        private void generate1SidedProgramOriginal()
         {
             if (TC20Flag == true)
             {
@@ -506,6 +788,158 @@ namespace WindowsFormsApplication1
                 ncfile3.Add("% ");
                 ncfile3.Add("O0001 " + progName);               // output file is always number 1
                 ncfile3.Add("#531 = " + workShiftTextBox.Text + "     (WORKSHIFT VALUE)");
+                ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    ncfile3.Add(s);
+                }
+
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = false;
+                btnTC20Save.Enabled = false;
+                btnEX110.Enabled = true;
+                btnEX110Save.Enabled = true;
+                btnSaveUSB.Enabled = false;
+                btnSL30Save.Enabled = false;
+                btnHyundai.Enabled = false;
+                btnHyundaiSave.Enabled = false;
+                btnTC20Save2.Enabled = false;
+                btnEX110Save2.Enabled = true;
+                btnSL30Save2.Enabled = false;
+                btnHyundaiSave2.Enabled = false;
+            }
+            else if (HaasFlag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                //ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    if (!s.Contains("%"))
+                    {
+                        ncfile3.Add(s);
+                    }
+                }
+
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = false;
+                btnTC20Save.Enabled = false;
+                btnEX110.Enabled = false;
+                btnEX110Save.Enabled = false;
+                btnSaveUSB.Enabled = true;
+                btnSL30Save.Enabled = true;
+                btnHyundai.Enabled = false;
+                btnHyundaiSave.Enabled = false;
+                btnTC20Save2.Enabled = false;
+                btnEX110Save2.Enabled = false;
+                btnSL30Save2.Enabled = true;
+                btnHyundaiSave2.Enabled = false;
+            }
+            else if (HyundaiFlag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                //ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    if (!s.Contains("%"))
+                    {
+                        ncfile3.Add(s);
+                    }
+                }
+
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = false;
+                btnTC20Save.Enabled = false;
+                btnEX110.Enabled = false;
+                btnEX110Save.Enabled = false;
+                btnSaveUSB.Enabled = false;
+                btnSL30Save.Enabled = false;
+                btnHyundai.Enabled = true;
+                btnHyundaiSave.Enabled = true;
+                btnTC20Save2.Enabled = false;
+                btnEX110Save2.Enabled = false;
+                btnSL30Save2.Enabled = false;
+                btnHyundaiSave2.Enabled = true;
+            }
+        }
+
+        private void generate1SidedProgram()
+        {
+            if (TC20Flag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+                ncfile3.Add("IF[#504 LT 0]THEN #531 = #504");
+                ncfile3.Add("IF[#504 GE 0]THEN #531 = 0.-#504");
+                ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
+
+                foreach (string s in ncfile1)       // append file1 to this new file
+                {
+                    ncfile3.Add(s);
+                }
+
+                ncfile3.Add(" M30");
+
+                foreach (string s in ncfile3)
+                {
+                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText("\n");
+                }
+
+                btnTC20.Enabled = true;
+                btnTC20Save.Enabled = true;
+                btnEX110.Enabled = false;
+                btnEX110Save.Enabled = false;
+                btnSaveUSB.Enabled = false;
+                btnSL30Save.Enabled = false;
+                btnHyundai.Enabled = false;
+                btnHyundaiSave.Enabled = false;
+                btnTC20Save2.Enabled = true;
+                btnEX110Save2.Enabled = false;
+                btnSL30Save2.Enabled = false;
+                btnHyundaiSave2.Enabled = false;
+            }
+            else if (EX110Flag == true)
+            {
+                ncFileBox.Clear();
+                ncfile3.Clear();
+
+                ncfile3.Add("% ");
+                ncfile3.Add("O0001 " + progName);               // output file is always number 1
+                ncfile3.Add("IF[#504 LT 0]THEN #531 = #504");
+                ncfile3.Add("IF[#504 GE 0]THEN #531 = 0.-#504");
                 ncfile3.Add("G10 P0 Z#531   (SET WORKSHIFT)");
 
                 foreach (string s in ncfile1)       // append file1 to this new file
