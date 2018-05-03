@@ -18,16 +18,16 @@ namespace WindowsFormsApplication1
         List<string> ncfile2 = new List<string>();    // a list of strings representing the second file
         List<string> ncfile3 = new List<string>();    // a list of strings representing the code to outpu to the machine
 
-        string ncFileName1 = @"D:\NCFiles\Side1.nc";                         // the file containing nc code for the first half of a 2 sided lathe program
-        string ncFileName2 = @"D:\NCFiles\Side2.nc";                         // the file containing nc code for the second half of a 2 sided lathe program
-        string ncFileName3 = @"D:\NCFiles\Side1BarFeed.nc";
-        string ncSubSpindle1FileName = @"D:\NCFiles\Side1SubSpindle.nc";
-        string ncSubSpindle2FileName = @"D:\NCFiles\Side2SubSpindle.nc";
+        string ncFileName1 = @"C:\NCFiles\Side1.nc";                         // the file containing nc code for the first half of a 2 sided lathe program
+        string ncFileName2 = @"C:\NCFiles\Side2.nc";                         // the file containing nc code for the second half of a 2 sided lathe program
+        string ncFileName3 = @"C:\NCFiles\Side1BarFeed.nc";
+        string ncSubSpindle1FileName = @"C:\NCFiles\Side1SubSpindle.nc";
+        string ncSubSpindle2FileName = @"C:\NCFiles\Side2SubSpindle.nc";
 
         string TC20FolderName = @"W:\";
         string EX110FolderName = @"X:\";
         string HaasSL30FolderName = @"Z:\";
-        string HyundaiFolderName = @"D:\NCFiles\Hyundai\";
+        string HyundaiFolderName = @"C:\NCFiles\Hyundai\";
 
         //string HaasVF1FolderName = @"C:\NCFiles\HaasVF1";
 
@@ -1634,6 +1634,9 @@ namespace WindowsFormsApplication1
             }
         }
 
-        
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -30,9 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.btnHyundaiSave2 = new System.Windows.Forms.Button();
             this.btnHyundaiSave = new System.Windows.Forms.Button();
+            this.btnSL30Save2 = new System.Windows.Forms.Button();
             this.btnSL30Save = new System.Windows.Forms.Button();
+            this.btnEX110Save2 = new System.Windows.Forms.Button();
             this.btnEX110Save = new System.Windows.Forms.Button();
+            this.btnTC20Save2 = new System.Windows.Forms.Button();
             this.btnTC20Save = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -62,10 +66,6 @@
             this.serialPortEX110 = new System.IO.Ports.SerialPort(this.components);
             this.serialPortHaasVF1 = new System.IO.Ports.SerialPort(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnTC20Save2 = new System.Windows.Forms.Button();
-            this.btnEX110Save2 = new System.Windows.Forms.Button();
-            this.btnSL30Save2 = new System.Windows.Forms.Button();
-            this.btnHyundaiSave2 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -110,6 +110,17 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip);
             // 
+            // btnHyundaiSave2
+            // 
+            this.btnHyundaiSave2.Enabled = false;
+            this.btnHyundaiSave2.Location = new System.Drawing.Point(285, 482);
+            this.btnHyundaiSave2.Name = "btnHyundaiSave2";
+            this.btnHyundaiSave2.Size = new System.Drawing.Size(75, 23);
+            this.btnHyundaiSave2.TabIndex = 10;
+            this.btnHyundaiSave2.Text = "Save...";
+            this.btnHyundaiSave2.UseVisualStyleBackColor = true;
+            this.btnHyundaiSave2.Click += new System.EventHandler(this.btnHyundaiSave2_Click);
+            // 
             // btnHyundaiSave
             // 
             this.btnHyundaiSave.Enabled = false;
@@ -120,6 +131,17 @@
             this.btnHyundaiSave.Text = "Save";
             this.btnHyundaiSave.UseVisualStyleBackColor = true;
             this.btnHyundaiSave.Click += new System.EventHandler(this.btnHyundaiSave_Click);
+            // 
+            // btnSL30Save2
+            // 
+            this.btnSL30Save2.Enabled = false;
+            this.btnSL30Save2.Location = new System.Drawing.Point(285, 402);
+            this.btnSL30Save2.Name = "btnSL30Save2";
+            this.btnSL30Save2.Size = new System.Drawing.Size(75, 23);
+            this.btnSL30Save2.TabIndex = 10;
+            this.btnSL30Save2.Text = "Save...";
+            this.btnSL30Save2.UseVisualStyleBackColor = true;
+            this.btnSL30Save2.Click += new System.EventHandler(this.btnSL30Save2_Click);
             // 
             // btnSL30Save
             // 
@@ -132,6 +154,17 @@
             this.btnSL30Save.UseVisualStyleBackColor = true;
             this.btnSL30Save.Click += new System.EventHandler(this.btnSL30Save_Click);
             // 
+            // btnEX110Save2
+            // 
+            this.btnEX110Save2.Enabled = false;
+            this.btnEX110Save2.Location = new System.Drawing.Point(285, 320);
+            this.btnEX110Save2.Name = "btnEX110Save2";
+            this.btnEX110Save2.Size = new System.Drawing.Size(75, 23);
+            this.btnEX110Save2.TabIndex = 10;
+            this.btnEX110Save2.Text = "Save...";
+            this.btnEX110Save2.UseVisualStyleBackColor = true;
+            this.btnEX110Save2.Click += new System.EventHandler(this.btnEX110Save2_Click);
+            // 
             // btnEX110Save
             // 
             this.btnEX110Save.Enabled = false;
@@ -142,6 +175,17 @@
             this.btnEX110Save.Text = "Save";
             this.btnEX110Save.UseVisualStyleBackColor = true;
             this.btnEX110Save.Click += new System.EventHandler(this.btnEX110Save_Click);
+            // 
+            // btnTC20Save2
+            // 
+            this.btnTC20Save2.Enabled = false;
+            this.btnTC20Save2.Location = new System.Drawing.Point(285, 244);
+            this.btnTC20Save2.Name = "btnTC20Save2";
+            this.btnTC20Save2.Size = new System.Drawing.Size(75, 23);
+            this.btnTC20Save2.TabIndex = 9;
+            this.btnTC20Save2.Text = "Save...";
+            this.btnTC20Save2.UseVisualStyleBackColor = true;
+            this.btnTC20Save2.Click += new System.EventHandler(this.btnTC20Save2_Click);
             // 
             // btnTC20Save
             // 
@@ -393,53 +437,10 @@
             // 
             this.toolTip1.Tag = "";
             // 
-            // btnTC20Save2
-            // 
-            this.btnTC20Save2.Enabled = false;
-            this.btnTC20Save2.Location = new System.Drawing.Point(285, 244);
-            this.btnTC20Save2.Name = "btnTC20Save2";
-            this.btnTC20Save2.Size = new System.Drawing.Size(75, 23);
-            this.btnTC20Save2.TabIndex = 9;
-            this.btnTC20Save2.Text = "Save...";
-            this.btnTC20Save2.UseVisualStyleBackColor = true;
-            this.btnTC20Save2.Click += new System.EventHandler(this.btnTC20Save2_Click);
-            // 
-            // btnEX110Save2
-            // 
-            this.btnEX110Save2.Enabled = false;
-            this.btnEX110Save2.Location = new System.Drawing.Point(285, 320);
-            this.btnEX110Save2.Name = "btnEX110Save2";
-            this.btnEX110Save2.Size = new System.Drawing.Size(75, 23);
-            this.btnEX110Save2.TabIndex = 10;
-            this.btnEX110Save2.Text = "Save...";
-            this.btnEX110Save2.UseVisualStyleBackColor = true;
-            this.btnEX110Save2.Click += new System.EventHandler(this.btnEX110Save2_Click);
-            // 
-            // btnSL30Save2
-            // 
-            this.btnSL30Save2.Enabled = false;
-            this.btnSL30Save2.Location = new System.Drawing.Point(285, 402);
-            this.btnSL30Save2.Name = "btnSL30Save2";
-            this.btnSL30Save2.Size = new System.Drawing.Size(75, 23);
-            this.btnSL30Save2.TabIndex = 10;
-            this.btnSL30Save2.Text = "Save...";
-            this.btnSL30Save2.UseVisualStyleBackColor = true;
-            this.btnSL30Save2.Click += new System.EventHandler(this.btnSL30Save2_Click);
-            // 
-            // btnHyundaiSave2
-            // 
-            this.btnHyundaiSave2.Enabled = false;
-            this.btnHyundaiSave2.Location = new System.Drawing.Point(285, 482);
-            this.btnHyundaiSave2.Name = "btnHyundaiSave2";
-            this.btnHyundaiSave2.Size = new System.Drawing.Size(75, 23);
-            this.btnHyundaiSave2.TabIndex = 10;
-            this.btnHyundaiSave2.Text = "Save...";
-            this.btnHyundaiSave2.UseVisualStyleBackColor = true;
-            this.btnHyundaiSave2.Click += new System.EventHandler(this.btnHyundaiSave2_Click);
-            // 
             // folderBrowserDialog1
             // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyDocuments;
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
             // 
             // Send2CNC
             // 
