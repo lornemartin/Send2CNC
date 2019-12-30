@@ -160,7 +160,7 @@ namespace WindowsFormsApplication1
 
             foreach (string s in ncfile3)
             {
-                ncFileBox.AppendText(s);
+                ncFileBox.AppendText(s + '\r');
                 ncFileBox.AppendText("\n");
             }
 
@@ -247,7 +247,7 @@ namespace WindowsFormsApplication1
 
             foreach (string s in ncfile3)
             {
-                ncFileBox.AppendText(s);
+                ncFileBox.AppendText(s + '\r');
                 ncFileBox.AppendText("\n");
             }
 
@@ -296,7 +296,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s+'\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -343,7 +343,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s + '\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -392,7 +392,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s + '\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -441,7 +441,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s + '\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -482,7 +482,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s + '\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -519,7 +519,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s + '\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -548,7 +548,7 @@ namespace WindowsFormsApplication1
                 {
                     if (!s.Contains("%"))
                     {
-                        ncfile3.Add(s);
+                        ncfile3.Add(s+'\r');
                     }
                 }
 
@@ -556,7 +556,7 @@ namespace WindowsFormsApplication1
 
                 foreach (string s in ncfile3)
                 {
-                    ncFileBox.AppendText(s);
+                    ncFileBox.AppendText(s + '\r');
                     ncFileBox.AppendText("\n");
                 }
 
@@ -585,7 +585,7 @@ namespace WindowsFormsApplication1
                 {
                     if (!s.Contains("%"))
                     {
-                        ncfile3.Add(s);
+                        ncfile3.Add(s + '\r');
                     }
                 }
 
