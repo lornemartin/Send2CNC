@@ -24,10 +24,10 @@ namespace WindowsFormsApplication1
         string ncSubSpindle1FileName = @"C:\NCFiles\Side1SubSpindle.nc";
         string ncSubSpindle2FileName = @"C:\NCFiles\Side2SubSpindle.nc";
 
-        string TC20FolderName = @"W:\";
-        string EX110FolderName = @"X:\";
-        string HaasSL30FolderName = @"Z:\";
-        string HyundaiFolderName = @"C:\NCFiles\Hyundai\";
+        string TC20FolderName = @"Q:\Takisawa TC-20 Lathe\Send to CNC\";
+        string EX110FolderName = @"Q:\Takisawa EX-10 Lathe\Send to CNC\";
+        string HaasSL30FolderName = @"Q:\Haas SL30\Send to CNC\";
+        string HyundaiFolderName = @"Q:\Hyundai Kia\Send to CNC\";
 
         //string HaasVF1FolderName = @"C:\NCFiles\HaasVF1";
 
