@@ -845,6 +845,8 @@ namespace WindowsFormsApplication1
                 string fileName = ncfile3[lineToExtractFileNumFrom];
                 fileName = fileName.Replace("O0001", fileNumber);
 
+                fileName = fileName.Replace("(", "").Replace(")","");   // remove all parenthesis from filename
+
                 // create a writer and open the file
                 TextWriter tw = new StreamWriter(saveFolderName + fileName + ".nc");
                 if (outputInitialPercent == true)
